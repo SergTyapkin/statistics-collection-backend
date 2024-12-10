@@ -34,4 +34,5 @@ def error500(err):
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', _config['api_port']))
-    app.run(port=port, debug=bool(_config['debug']))
+    host = _config['api_host']
+    app.run(port=port, debug=bool(_config['debug']), host=host)
