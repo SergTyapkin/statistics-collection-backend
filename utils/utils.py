@@ -12,21 +12,14 @@ def read_config(filepath: str) -> dict:
         config = json.load(file)
         file.close()
 
-        if "db_host" not in config:
-            config["db_host"] = os.environ["DATABASE_HOST"]
-        if "db_port" not in config:
-            config["db_port"] = os.environ["DATABASE_PORT"]
-        if "db_user" not in config:
-            config["db_user"] = os.environ["DATABASE_USER"]
-        if "db_db" not in config:
-            config["db_db"] = os.environ["DATABASE_DB"]
-        if "db_password" not in config:
-            config["db_password"] = os.environ["DATABASE_PASSWORD"]
+        config["db_host"] = os.environ["DATABASE_HOST"] or config["db_host"]
+        config["db_port"] = os.environ["DATABASE_PORT"] or config["db_port"]
+        config["db_user"] = os.environ["DATABASE_USER"] or config["db_user"]
+        config["db_db"] = os.environ["DATABASE_DB"] or config["db_db"]
+        config["db_password"] = os.environ["DATABASE_PASSWORD"] or config["db_password"]
 
-        if "api_host" not in config:
-            config["api_host"] = os.environ["API_HOST"]
-        if "api_port" not in config:
-            config["api_port"] = os.environ["API_PORT"]
+        config["api_host"] = os.environ["API_HOST"] or config["api_host"]
+        config["api_port"] = os.environ["API_PORT"] or config["api_port"]
 
         return config
     except Exception as e:
