@@ -12,14 +12,14 @@ def read_config(filepath: str) -> dict:
         config = json.load(file)
         file.close()
 
-        config["db_host"] = os.environ["DATABASE_HOST"] or config["db_host"]
-        config["db_port"] = os.environ["DATABASE_PORT"] or config["db_port"]
-        config["db_user"] = os.environ["DATABASE_USER"] or config["db_user"]
-        config["db_db"] = os.environ["DATABASE_DB"] or config["db_db"]
-        config["db_password"] = os.environ["DATABASE_PASSWORD"] or config["db_password"]
+        config["db_host"] = os.environ.get("DATABASE_HOST") or config["db_host"]
+        config["db_port"] = os.environ.get("DATABASE_PORT") or config["db_port"]
+        config["db_user"] = os.environ.get("DATABASE_USER") or config["db_user"]
+        config["db_db"] = os.environ.get("DATABASE_DB") or config["db_db"]
+        config["db_password"] = os.environ.get("DATABASE_PASSWORD") or config["db_password"]
 
-        config["api_host"] = os.environ["API_HOST"] or config["api_host"]
-        config["api_port"] = os.environ["API_PORT"] or config["api_port"]
+        config["api_host"] = os.environ.get("API_HOST") or config["api_host"]
+        config["api_port"] = os.environ.get("API_PORT") or config["api_port"]
 
         return config
     except Exception as e:
