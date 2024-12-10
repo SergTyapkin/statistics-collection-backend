@@ -26,7 +26,7 @@ def serviceCreate():
 @app.route("/", methods=["DELETE"])
 def serviceDelete():
     try:
-        req = request.json
+        req = request.args
         token = req['token']
     except:
         return jsonResponse("Не удалось сериализовать json", HTTP_INVALID_DATA)
@@ -37,7 +37,7 @@ def serviceDelete():
 @app.route("/", methods=["GET"])
 def serviceGet():
     try:
-        req = request.json
+        req = request.args
         token = req['token']
     except:
         return jsonResponse("Не удалось сериализовать json", HTTP_INVALID_DATA)

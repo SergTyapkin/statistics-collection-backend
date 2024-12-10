@@ -29,7 +29,7 @@ def statisticAdd():
 @app.route("/", methods=["DELETE"])
 def statisticDelete():
     try:
-        req = request.json
+        req = request.args
         id = int(req['id'])
     except:
         return jsonResponse("Не удалось сериализовать json", HTTP_INVALID_DATA)
@@ -37,11 +37,11 @@ def statisticDelete():
     removeStatistic(id)
     return jsonResponse("Запись статистики удалена")
 
-@app.route("/", methods=["get"])
+@app.route("/", methods=["GET"])
 def statisticsGet():
     try:
-        req = request.json
-        service_token = req['service_token']
+        req = request.args
+        service_token = req['token']
     except:
         return jsonResponse("Не удалось сериализовать json", HTTP_INVALID_DATA)
 
