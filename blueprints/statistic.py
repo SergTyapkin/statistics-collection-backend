@@ -11,7 +11,7 @@ app = Blueprint('statistic', __name__)
 def statisticAdd():
     try:
         req = request.json
-        service_token = req['service_token']
+        service_token = req['token']
         text = req.get('text')
         value = req.get('value')
     except:
