@@ -44,10 +44,6 @@ services:
       - DATABASE_DB=${POSTGRES_DB}
       - API_PORT
       - API_HOST
-    volumes:
-      - ./dist:/usr/share/nginx/html:rw
-      - ./certbot/www:/var/www/certbot/:ro
-      - ./certbot/conf/:/etc/nginx/ssl/:ro
     ports:
       - "${API_PORT}:${API_PORT}"
     networks:
