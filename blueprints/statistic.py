@@ -7,7 +7,7 @@ from utils.utils import jsonResponse
 app = Blueprint('statistic', __name__)
 
 
-@app.route("/", methods=["POST"])
+@app.route("", methods=["POST"])
 def statisticAdd():
     try:
         req = request.json
@@ -26,7 +26,7 @@ def statisticAdd():
     return jsonResponse(statistic.toDict())
 
 
-@app.route("/", methods=["DELETE"])
+@app.route("", methods=["DELETE"])
 def statisticDelete():
     try:
         req = request.args
@@ -37,7 +37,7 @@ def statisticDelete():
     removeStatistic(id)
     return jsonResponse("Запись статистики удалена")
 
-@app.route("/", methods=["GET"])
+@app.route("", methods=["GET"])
 def statisticsGet():
     try:
         req = request.args

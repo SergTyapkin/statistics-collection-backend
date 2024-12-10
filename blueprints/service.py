@@ -7,7 +7,7 @@ from utils.utils import jsonResponse
 app = Blueprint('service', __name__)
 
 
-@app.route("/", methods=["POST"])
+@app.route("", methods=["POST"])
 def serviceCreate():
     try:
         req = request.json
@@ -23,7 +23,7 @@ def serviceCreate():
     return jsonResponse(service.toDict())
 
 
-@app.route("/", methods=["DELETE"])
+@app.route("", methods=["DELETE"])
 def serviceDelete():
     try:
         req = request.args
@@ -34,7 +34,7 @@ def serviceDelete():
     removeService(token)
     return jsonResponse("Сервис удален")
 
-@app.route("/", methods=["GET"])
+@app.route("", methods=["GET"])
 def serviceGet():
     try:
         req = request.args
@@ -55,7 +55,7 @@ def serviceGetAll():
         "services": list(map(lambda r: r.toDict(), res))
     })
 
-@app.route("/", methods=["PUT"])
+@app.route("", methods=["PUT"])
 def serviceUpdate():
     try:
         req = request.json
