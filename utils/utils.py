@@ -23,13 +23,10 @@ def read_config(filepath: str) -> dict:
         if "db_password" not in config:
             config["db_password"] = os.environ["DATABASE_PASSWORD"]
 
-        if "ws_host" not in config:
-            config["ws_host"] = os.environ["WS_HOST"]
-        if "ws_port" not in config:
-            config["ws_port"] = os.environ["WS_PORT"]
-
-        if "admin_username" not in config:
-            config["admin_username"] = os.environ["ADMIN_USERNAME"]
+        if "api_host" not in config:
+            config["api_host"] = os.environ["API_HOST"]
+        if "api_port" not in config:
+            config["api_port"] = os.environ["API_PORT"]
 
         return config
     except Exception as e:
@@ -44,11 +41,13 @@ def times_to_str(object):
             object[key] = object[key].isoformat()
         if type(object[key]) is datetime.date:
             object[key] = object[key].isoformat()
+    return object
 
 
 def list_times_to_str(listWithTimedelta):
     for el in listWithTimedelta:
         times_to_str(el)
+    return listWithTimedelta
 
 
 def jsonResponse(resp: dict or str, code: int = HTTP_OK):

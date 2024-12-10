@@ -1,8 +1,7 @@
 from flask import Blueprint, request
 
-from connections import DB
 from constants import *
-from storage.storage import addService, removeService, addStatistic, removeStatistic, getServiceStatistics
+from storage.storage import addStatistic, removeStatistic, getServiceStatistics
 from utils.utils import jsonResponse
 
 app = Blueprint('statistic', __name__)

@@ -12,5 +12,5 @@ DB = Database(
     password=config['db_password'],
     dbname=config['db_db'],
 )
-_host = config.get('ws_host', '0.0.0.0')
-_port = int(os.environ.get('PORT', config['ws_port']))  # get environment variable "PORT" or port from config
+_host = config.get('api_host', '0.0.0.0')
+_port = int(os.environ.get('PORT', config['api_port']))  # get environment variable "PORT" or port from config

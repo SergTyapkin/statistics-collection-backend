@@ -1,10 +1,12 @@
 {
     "db_port": 5432,
     "db_user": "postgres",
-    "db_database": "statistics-collector",
+    "db_host": "localhost",
+    "db_db": "statistics-collector",
     "db_password": "root",
 
-    "api_port": "9000",
+    "api_port": "10000",
+    "api_host": "0.0.0.0",
     "debug": "False",
 
     "frontend_url": "https://squest.online",

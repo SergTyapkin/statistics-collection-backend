@@ -1,6 +1,5 @@
 from flask import Blueprint, request
 
-from connections import DB
 from constants import *
 from storage.storage import addService, removeService, getService, getAllServices, updateServiceName
 from utils.utils import jsonResponse
@@ -19,7 +18,7 @@ def serviceCreate():
 
     service = addService(name)
     if not service:
-        return jsonResponse("Не удалось создать сервис", HTTP_INTERNAL_ERROR)
+        return jsonResponse("Не удалось создать сервис. Имя уже занято", HTTP_DATA_CONFLICT)
 
     return jsonResponse(service.toDict())
 
@@ -50,14 +49,14 @@ def serviceGet():
     return jsonResponse(res.toDict())
 
 @app.route("/all", methods=["GET"])
-def serviceGet():
+def serviceGetAll():
     res = getAllServices()
     return jsonResponse({
         "services": list(map(lambda r: r.toDict(), res))
     })
 
 @app.route("/", methods=["PUT"])
-def serviceGet():
+def serviceUpdate():
     try:
         req = request.json
         token = req['token']
