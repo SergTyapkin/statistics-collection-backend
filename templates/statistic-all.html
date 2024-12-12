@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Services</title>
+</head>
+<body>
+
+<h2><a href="/"><- В начало</a></h2>
+
+<section>
+  <table>
+    <tr>
+      <th>id</th>
+      <th>Text</th>
+      <th>Value</th>
+      <th>Bool</th>
+      <th>Время</th>
+    </tr>
+    {% for stat in statistics %}
+    <tr>
+      <td>{{ stat.id }}</td>
+      <td>{{ stat.text }}</td>
+      <td>{{ stat.value }}</td>
+      <td>{{ stat.bool }}</td>
+      <td>{{ stat.datetime }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</section>
+
+</body>
+</html>

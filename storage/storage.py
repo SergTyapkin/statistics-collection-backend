@@ -72,5 +72,5 @@ def removeService(service_token: str):
     DB.execute(SQL.deleteServiceByToken, [service_token])
 
 
-def removeStatistic(statistic_id: int):
-    DB.execute(SQL.deleteStatisticsById, [statistic_id])
+def removeStatistic(statistic_id: int, service_write_token: str):
+    DB.execute(SQL.deleteStatisticsByIdServiceToken, [statistic_id, service_write_token])

@@ -48,3 +48,7 @@ def jsonResponse(resp: dict or str, code: int = HTTP_OK):
         resp = {"info": resp}
 
     return make_response(jsonify(resp), code)
+
+
+def time_prettify(time: datetime.datetime):
+    return time.strftime("%d.%m.%Y %H:%M:%S")

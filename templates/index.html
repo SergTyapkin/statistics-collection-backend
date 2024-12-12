@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stats Service</title>
+</head>
+<body>
+
+<h2>Привет!</h2>
+<h2>Это сервис сбора и просмотра статистики</h2>
+<section>
+  Чтобы это сделать нужно:
+  <ol>
+    <li>Создать сервис, получить токен для записи и токен для просмотра</li>
+    <li>Отправить POST-запрос на /statistic с токеном записи</li>
+    <li>Данные по статистике будут доступны через токен просмотра</li>
+  </ol>
+</section>
+<section>
+  <div><a href="/ui/service/all">Посмотреть все сервисы</a></div>
+  <div><a href="/ui/service/create">Создать сервис</a></div>
+  <div><a href="#" onclick="location.href = `/ui/statistic/all?token=${prompt('Введите токен доступа к сервису')}`">Посмотреть статистику</a></div>
+  <div><a href="/ui/statistic/delete">Удалить статистику</a></div>
+  <div><a href="/ui/service/delete">Удалить сервис</a></div>
+  <div><a href="/ui/statistic/create">Добавить статистику</a></div>
+</section>
+
+</body>
+</html>

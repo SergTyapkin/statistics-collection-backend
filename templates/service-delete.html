@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Service create</title>
+</head>
+<body>
+
+<h2><a href="/"><- В начало</a></h2>
+
+<section>
+  <h3>Введите данные сервиса:</h3>
+
+  <section>
+    <div>
+      <label for="input-token">Токен доступа:</label>
+      <input type="text" id="input-token">
+    </div>
+  </section>
+
+  <button onclick="send()">Отправить</button>
+
+  <section id="output" style="display: none">
+    <div style="color: green">Сервис и вся его статистика успешно удалены, если существовали</div>
+  </section>
+</section>
+
+
+<script>
+  async function send() {
+    const token = document.getElementById('input-token').value;
+    const res = await fetch(`/service?token=${token}`, {
+      method: 'DELETE',
+    });
+    if (res.ok) {
+      document.getElementById('output').style.removeProperty('display');
+    }
+  }
+</script>
+</body>
+</html>

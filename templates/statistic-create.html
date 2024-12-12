@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Service create</title>
+</head>
+<body>
+
+<h2><a href="/"><- В начало</a></h2>
+
+<section>
+  <h3>Введите данные статистики:</h3>
+
+  <section>
+    <div>
+      <label for="input-token">Токен записи для сервиса:</label>
+      <input type="text" id="input-token">
+    </div>
+    <div>
+      <label for="input-text">Text:</label>
+      <input type="text" id="input-text">
+    </div>
+    <div>
+      <label for="input-value">Value:</label>
+      <input type="number" id="input-value">
+    </div>
+    <div>
+      <label for="input-bool">Bool:</label>
+      <input type="checkbox" id="input-bool">
+    </div>
+  </section>
+
+  <button onclick="send()">Отправить</button>
+
+  <section id="output" style="display: none">
+    <div>Данные добавленной записи статистики:</div>
+    <div>id: <span id="output-id" style="color: green"></span></div>
+    <div>text: <span id="output-text" style="color: green"></span></div>
+    <div>value: <span id="output-value" style="color: green"></span></div>
+    <div>bool: <span id="output-bool" style="color: green"></span></div>
+    <div>Время добавления: <span id="output-datetime" style="color: green"></span></div>
+  </section>
+</section>
+
+
+<script>
+  async function send() {
+    const token = document.getElementById('input-token').value;
+    const text = document.getElementById('input-text').value;
+    const value = document.getElementById('input-value').value;
+    const bool = document.getElementById('input-bool').checked;
+    const res = await fetch('/statistic', {
+      method: 'POST',
+      body: JSON.stringify({
+        token: token,
+        text: text,
+        value: value,
+        bool: bool
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    const jsonRes = await res.json();
+    if (res.ok) {
+      document.getElementById('output').style.removeProperty('display');
+      document.getElementById('output-id').innerText = jsonRes.id;
+      document.getElementById('output-text').innerText = jsonRes.text;
+      document.getElementById('output-value').innerText = jsonRes.value;
+      document.getElementById('output-bool').innerText = jsonRes.bool;
+      document.getElementById('output-datetime').innerText = jsonRes.datetime;
+    }
+  }
+</script>
+</body>
+</html>

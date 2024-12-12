@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 
 from constants import *
-from storage.storage import addStatistic, removeStatistic, getServiceStatistics
+from storage.storage import addStatistic, removeStatistic, getServiceStatistics, getService
 from utils.utils import jsonResponse
 
 app = Blueprint('statistic', __name__)
@@ -11,7 +11,7 @@ app = Blueprint('statistic', __name__)
 def statisticAdd():
     try:
         req = request.json
-        service_write_token = req['write_token']
+        service_write_token = req['token']
         text = req.get('text')
         value = req.get('value')
         boolean = req.get('bool')
@@ -32,10 +32,15 @@ def statisticDelete():
     try:
         req = request.args
         id = int(req['id'])
+        service_token = req['token']
     except:
         return jsonResponse("Не удалось сериализовать json", HTTP_INVALID_DATA)
 
-    removeStatistic(id)
+    service = getService(service_token)
+    if not service:
+        return jsonResponse("Сервис не найден", HTTP_NOT_FOUND)
+
+    removeStatistic(id, service.write_token)
     return jsonResponse("Запись статистики удалена")
 
 @app.route("", methods=["GET"])
@@ -46,7 +51,12 @@ def statisticsGet():
     except:
         return jsonResponse("Не удалось сериализовать json", HTTP_INVALID_DATA)
 
-    res = getServiceStatistics(service_token)
+    service = getService(service_token)
+    if not service:
+        return jsonResponse("Сервис не найден", HTTP_NOT_FOUND)
+
+
+    res = getServiceStatistics(service.write_token)
     return jsonResponse({
         "statistics": list(map(lambda s: s.toDict(), res))
     })

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Service create</title>
+</head>
+<body>
+
+<h2><a href="/"><- В начало</a></h2>
+
+<section>
+  <h3>Введите данные статистики:</h3>
+
+  <section>
+    <div>
+      <label for="input-token">Токен доступа к сервису:</label>
+      <input type="text" id="input-token">
+    </div>
+    <div>
+      <label for="input-id">id статистики:</label>
+      <input type="text" id="input-id">
+    </div>
+  </section>
+
+  <button onclick="send()">Отправить</button>
+
+  <section id="output" style="display: none">
+    <div style="color: green">Запись статистики успешно удалена, если существовала</div>
+  </section>
+</section>
+
+
+<script>
+  async function send() {
+    const token = document.getElementById('input-token').value;
+    const id = document.getElementById('input-id').value;
+    const res = await fetch(`/statistic?token=${token}&id=${id}`, {
+      method: 'DELETE',
+    });
+    if (res.ok) {
+      document.getElementById('output').style.removeProperty('display');
+    }
+  }
+</script>
+</body>
+</html>

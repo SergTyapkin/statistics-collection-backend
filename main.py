@@ -1,6 +1,7 @@
 import os
-from flask import Flask
+from flask import Flask, render_template
 
+from blueprints.ui import app as ui_app
 from blueprints.service import app as service_app
 from blueprints.statistic import app as statistic_app
 from middleware import Middleware
@@ -12,12 +13,13 @@ _config = read_config('config.json')
 app = Flask(__name__)
 app.wsgi_app = Middleware(app.wsgi_app, url_prefix='/api', cors_origins=_config['cors-origins'])
 
+app.register_blueprint(ui_app, url_prefix='/ui')
 app.register_blueprint(service_app, url_prefix='/service')
 app.register_blueprint(statistic_app, url_prefix='/statistic')
 
 @app.route('/')
 def home():
-    return "Это начальная страница API сервиса сбора статистики, а не сайт. Вiйди отсюда!"
+    return render_template('index.html')
 
 
 @app.errorhandler(404)

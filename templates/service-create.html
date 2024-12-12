@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Service create</title>
+</head>
+<body>
+
+<h2><a href="/"><- В начало</a></h2>
+
+<section>
+  <h3>Введите данные сервиса:</h3>
+
+  <section>
+    <div>
+      <label for="input-name">Название:</label>
+      <input type="text" id="input-name">
+    </div>
+  </section>
+
+  <button onclick="send()">Отправить</button>
+
+  <section id="output" style="display: none">
+    <div>
+      <div>Токен доступа (с ним доступен просмотр статистики и изменение сервиса):</div>
+      <mark id="output-token" style="color: green"></mark>
+    </div>
+    <br>
+    <div>
+      <div>Токен записи (с ним отправляется статистика):</div>
+      <mark id="output-write_token" style="color: green"></mark>
+    </div>
+    <br>
+    <div style="color: red">Сохраите эти токены. Больше они не будут вам показаны никогда!</div>
+  </section>
+</section>
+
+
+<script>
+  async function send() {
+    const name = document.getElementById('input-name').value;
+    const res = await fetch('/service', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: name,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    const jsonRes = await res.json();
+    if (res.ok) {
+      document.getElementById('output').style.removeProperty('display');
+      document.getElementById('output-token').innerText = jsonRes.token;
+      document.getElementById('output-write_token').innerText = jsonRes.write_token;
+    }
+  }
+</script>
+</body>
+</html>

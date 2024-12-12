@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Services</title>
+</head>
+<body>
+
+<h2><a href="/"><- В начало</a></h2>
+
+<section>
+  <table>
+    <tr>
+      <th>Название</th>
+      <th>Дата регистрации</th>
+    </tr>
+    {% for service in services %}
+    <tr>
+      <td>{{ service.name }}</td>
+      <td>{{ service.registered }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</section>
+
+</body>
+</html>

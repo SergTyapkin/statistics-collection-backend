@@ -32,9 +32,10 @@ updateServiceNameByToken = \
     "RETURNING *"
 
 # ----- DELETES -----
-deleteStatisticsById = \
+deleteStatisticsByIdServiceToken = \
     "DELETE FROM statistics " \
-    "WHERE id = %s"
+    "WHERE id = %s AND " \
+    "service_write_token = %s"
 
 deleteServiceByToken = \
     "DELETE FROM services " \

@@ -8,12 +8,13 @@ class Service:
     write_token: str
     js_parser_code: str
     name: str
+    registered: str
 
     def __init__(self, token, write_token, name, js_parser_code, registered):
-        self.write_token = write_token
         self.token = token
-        self.name = name
+        self.write_token = write_token
         self.js_parser_code = js_parser_code
+        self.name = name
         self.registered = registered
 
     def __repr__(self):
