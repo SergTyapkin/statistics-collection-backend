@@ -20,7 +20,7 @@ def serviceCreate():
     if not service:
         return jsonResponse("Не удалось создать сервис. Имя уже занято", HTTP_DATA_CONFLICT)
 
-    return jsonResponse(service.toDict())
+    return jsonResponse(service.toDict(True))
 
 
 @app.route("", methods=["DELETE"])
@@ -34,6 +34,7 @@ def serviceDelete():
     removeService(token)
     return jsonResponse("Сервис удален")
 
+
 @app.route("", methods=["GET"])
 def serviceGet():
     try:
@@ -46,26 +47,36 @@ def serviceGet():
     if not res:
         return jsonResponse("Сервис не найден", HTTP_NOT_FOUND)
 
-    return jsonResponse(res.toDict())
+    return jsonResponse(res.toDict(True))
+
 
 @app.route("/all", methods=["GET"])
 def serviceGetAll():
     res = getAllServices()
     return jsonResponse({
-        "services": list(map(lambda r: r.toDict(), res))
+        "services": list(map(lambda r: r.toDict(False), res))
     })
+
 
 @app.route("", methods=["PUT"])
 def serviceUpdate():
     try:
         req = request.json
         token = req['token']
-        new_name = req['new_name']
+        new_name = req.get('new_name')
+        js_parser_code = req.get('js_parser_code')
     except:
         return jsonResponse("Не удалось сериализовать json", HTTP_INVALID_DATA)
 
-    res = updateServiceName(token, new_name)
+    service = getService(token)
+    if not service:
+        return jsonResponse("Сервис не найден", HTTP_NOT_FOUND)
+
+    new_name = new_name or service.name
+    js_parser_code = js_parser_code or service.js_parser_code
+
+    res = updateServiceName(token, new_name, js_parser_code)
     if not res:
         return jsonResponse("Сервис не найден", HTTP_NOT_FOUND)
 
-    return jsonResponse(res.toDict())
+    return jsonResponse(res.toDict(True))

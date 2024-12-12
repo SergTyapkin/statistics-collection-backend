@@ -11,15 +11,16 @@ app = Blueprint('statistic', __name__)
 def statisticAdd():
     try:
         req = request.json
-        service_token = req['service_token']
+        service_write_token = req['write_token']
         text = req.get('text')
         value = req.get('value')
+        boolean = req.get('bool')
     except:
         return jsonResponse("Не удалось сериализовать json", HTTP_INVALID_DATA)
     if text is None and value is None:
         return jsonResponse("Хотя бы одно поле text или value должно быть не пустым", HTTP_INVALID_DATA)
 
-    statistic = addStatistic(service_token, text, value)
+    statistic = addStatistic(service_write_token, text, value, boolean)
     if not statistic:
         return jsonResponse("Не удалось добавить статистику. Возможно, такого сервиса не существует", HTTP_NOT_FOUND)
 
