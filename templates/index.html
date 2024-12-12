@@ -1,28 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Stats Service</title>
-</head>
+{% include "_header.html" %}
+
 <body>
 
-<h2>Привет!</h2>
-<h2>Это сервис сбора и просмотра статистики</h2>
-<section>
-  Чтобы это сделать нужно:
-  <ol>
-    <li>Создать сервис, получить токен для записи и токен для просмотра</li>
-    <li>Отправить POST-запрос на /statistic с токеном записи</li>
-    <li>Данные по статистике будут доступны через токен просмотра</li>
-  </ol>
-</section>
-<section>
+<header>
+  <h2>Привет!</h2>
+  <h2>Это сервис сбора и просмотра статистики</h2>
+</header>
+
+<nav>
   <div><a href="/ui/service/all">Посмотреть все сервисы</a></div>
   <div><a href="/ui/service/create">Создать сервис</a></div>
   <div><a href="#" onclick="location.href = `/ui/statistic/all?token=${prompt('Введите токен доступа к сервису')}`">Посмотреть статистику</a></div>
   <div><a href="/ui/statistic/delete">Удалить статистику</a></div>
   <div><a href="/ui/service/delete">Удалить сервис</a></div>
   <div><a href="/ui/statistic/create">Добавить статистику</a></div>
+</nav>
+
+<section>
+  <h3>Как начать пользоваться?</h3>
+  <ol>
+    <li>Создать сервис, получить токен для записи и токен для просмотра</li>
+    <li>Отправить POST-запрос на /statistic с токеном записи</li>
+    <li>Данные по статистике будут доступны через токен просмотра</li>
+  </ol>
+</section>
+
+<section>
+  <h3>Описание API</h3>
+  <ul>
+    <li>
+      <mark>POST /service</mark> - создать сервис
+      <code lang="json">
+{
+  "name": string
+}
+      </code>
+    </li>
+    <li>
+      <mark>PUT /service</mark> - изменить сервис по токену доступа
+      <code lang="json">
+{
+  "token": string,
+  "name": string?,
+  "js_parser_code": string?
+}
+      </code>
+    </li>
+    <li><mark>GET /service?token={token}</mark> - получить информацию о сервисе по токену доступа</li>
+    <li><mark>GET /service/all</mark> - получить список всех сервисов</li>
+    <li><mark>DELETE /service?token={token}</mark> - удалить сервис и всю его статистистику по токену доступа</li>
+    <br>
+    <li>
+      <mark>POST /statistic</mark> - добавить статистику для сервиса по токену ЗАПИСИ
+      <code lang="json">
+{
+  "token": string,
+  "text": string?,
+  "value": number?,
+  "bool": boolean?,
+}
+      </code>
+    </li>
+    <li><mark>GET /statistic/all?token={token}</mark> - получить список всей статистики сервиса по токену доступа</li>
+    <li><mark>DELETE /statistic?id={id}&token={token}</mark> - удалить одну запись статистики по id записи и токену доступа</li>
+  </ul>
 </section>
 
 </body>

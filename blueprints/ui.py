@@ -1,8 +1,7 @@
 from flask import Blueprint, request, render_template, redirect
 
-from constants import HTTP_INVALID_DATA
 from storage.storage import getAllServices, getServiceStatistics, getService
-from utils.utils import time_prettify, jsonResponse
+from utils.utils import time_prettify
 
 app = Blueprint('ui', __name__)
 
@@ -44,7 +43,7 @@ def uiStatisticGetAll():
     statistics = getServiceStatistics(service.write_token)
     for s in statistics:
         s.datetime = time_prettify(s.datetime)
-    return render_template('statistic-all.html', statistics=statistics)
+    return render_template('statistic-all.html', statistics=statistics, service=service)
 
 @app.route("/statistic/delete", methods=["GET"])
 def uiStatisticDelete():

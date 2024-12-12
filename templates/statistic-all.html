@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>All Services</title>
-</head>
-<body>
+{% include "_header.html" %}
 
-<h2><a href="/"><- В начало</a></h2>
+<body>
+{% include "_back.html" %}
+
+<section>
+  <h3>Данные сервиса</h3>
+  <div>Название: {{ service.name }}</div>
+  <div>Дата регистрации: {{ service.registered }}</div>
+</section>
 
 <section>
   <table>

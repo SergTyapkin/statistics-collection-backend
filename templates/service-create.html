@@ -1,36 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Service create</title>
-</head>
-<body>
+{% include "_header.html" %}
 
-<h2><a href="/"><- В начало</a></h2>
+<body>
+{% include "_back.html" %}
 
 <section>
   <h3>Введите данные сервиса:</h3>
 
-  <section>
+  <form>
     <div>
       <label for="input-name">Название:</label>
       <input type="text" id="input-name">
     </div>
-  </section>
+  </form>
 
   <button onclick="send()">Отправить</button>
 
   <section id="output" style="display: none">
     <div>
       <div>Токен доступа (с ним доступен просмотр статистики и изменение сервиса):</div>
-      <mark id="output-token" style="color: green"></mark>
+      <mark id="output-token" style="color: lightgreen"></mark>
     </div>
     <br>
     <div>
       <div>Токен записи (с ним отправляется статистика):</div>
-      <mark id="output-write_token" style="color: green"></mark>
+      <mark id="output-write_token" style="color: lightgreen"></mark>
     </div>
     <br>
+    <img src="{{ url_for('static', filename='images/warning.svg') }}" alt="warn">
     <div style="color: red">Сохраите эти токены. Больше они не будут вам показаны никогда!</div>
   </section>
 </section>

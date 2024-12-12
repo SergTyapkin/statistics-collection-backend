@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Service create</title>
-</head>
-<body>
+{% include "_header.html" %}
 
-<h2><a href="/"><- В начало</a></h2>
+<body>
+{% include "_back.html" %}
 
 <section>
   <h3>Введите данные статистики:</h3>
 
-  <section>
+  <form>
     <div>
       <label for="input-token">Токен записи для сервиса:</label>
       <input type="text" id="input-token">
@@ -28,17 +23,18 @@
       <label for="input-bool">Bool:</label>
       <input type="checkbox" id="input-bool">
     </div>
-  </section>
+  </form>
 
   <button onclick="send()">Отправить</button>
 
   <section id="output" style="display: none">
+    <img src="{{ url_for('static', filename='images/done.svg') }}" alt="done">
     <div>Данные добавленной записи статистики:</div>
-    <div>id: <span id="output-id" style="color: green"></span></div>
-    <div>text: <span id="output-text" style="color: green"></span></div>
-    <div>value: <span id="output-value" style="color: green"></span></div>
-    <div>bool: <span id="output-bool" style="color: green"></span></div>
-    <div>Время добавления: <span id="output-datetime" style="color: green"></span></div>
+    <div>id: <span id="output-id" style="color: lightgreen"></span></div>
+    <div>text: <span id="output-text" style="color: lightgreen"></span></div>
+    <div>value: <span id="output-value" style="color: lightgreen"></span></div>
+    <div>bool: <span id="output-bool" style="color: lightgreen"></span></div>
+    <div>Время добавления: <span id="output-datetime" style="color: lightgreen"></span></div>
   </section>
 </section>
 

@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Service create</title>
-</head>
-<body>
+{% include "_header.html" %}
 
-<h2><a href="/"><- В начало</a></h2>
+<body>
+{% include "_back.html" %}
 
 <section>
   <h3>Введите данные статистики:</h3>
 
-  <section>
+  <form>
     <div>
       <label for="input-token">Токен доступа к сервису:</label>
       <input type="text" id="input-token">
@@ -20,12 +15,13 @@
       <label for="input-id">id статистики:</label>
       <input type="text" id="input-id">
     </div>
-  </section>
+  </form>
 
   <button onclick="send()">Отправить</button>
 
   <section id="output" style="display: none">
-    <div style="color: green">Запись статистики успешно удалена, если существовала</div>
+    <img src="{{ url_for('static', filename='images/done.svg') }}" alt="done">
+    <div style="color: lightgreen">Запись статистики успешно удалена, если существовала</div>
   </section>
 </section>
 
